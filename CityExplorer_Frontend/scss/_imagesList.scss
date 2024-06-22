@@ -1,0 +1,26 @@
+.app {
+    .custom-image-container {
+        position: relative;
+    }
+
+    .custom-image {
+        width: 80%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+    }
+
+    .large {
+        grid-column-end: span 3;
+    }
+
+    .medium {
+        grid-column-end: span 2;
+    }
+
+    .small {
+        grid-column-end: span 4;
+    }
+
+
+}

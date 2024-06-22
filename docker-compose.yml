@@ -1,0 +1,46 @@
+version: '3.3'
+
+services:
+  db:
+    container_name: CityExplorer_mysql_db
+    build:
+      dockerfile: DockerFile-db
+      context: .
+    ports:
+      - "3306:80"
+    environment:
+      MYSQL_DATABASE: city_explorer
+      MYSQL_USER: maximo
+      MYSQL_PASSWORD: Maximo.2001
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+
+  laravel:
+    container_name: CityExplorer_Backend
+    build:
+      dockerfile: DockerFile-backend
+      context: .
+    volumes:
+      - laravel_data:/var/www/html
+    ports:
+      - "8000:80"
+    restart: always
+    depends_on:
+      - db
+
+  react:
+    container_name: CityExplorer_Frontend
+    build:
+      dockerfile: DockerFile-frontend
+      context: .
+    volumes:
+      - react_data:/var/www/html
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - laravel
+
+volumes:
+  laravel_data:
+  react_data:
